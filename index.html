@@ -542,25 +542,27 @@
                 const exchangeHkd = ref(520);
 
                 const daysList = ref([
-                    { weekday: 'Mon', dateNum: '20' },
-                    { weekday: 'Tue', dateNum: '21' },
-                    { weekday: 'Wed', dateNum: '22' },
-                    { weekday: 'Thu', dateNum: '23' },
-                    { weekday: 'Fri', dateNum: '24' },
-                    { weekday: 'Sat', dateNum: '25' },
-                    { weekday: 'Sun', dateNum: '26' },
-                    { weekday: 'Mon', dateNum: '27' },
-                    { weekday: 'Tue', dateNum: '28' },
-                    { weekday: 'Wed', dateNum: '29' },
-                    { weekday: 'Thu', dateNum: '30' },
-                    { weekday: 'Fri', dateNum: '31' }
+                   { weekday: 'Mon', dateNum: '20' },
+    { weekday: 'Tue', dateNum: '21' },
+    { weekday: 'Wed', dateNum: '22' },
+    { weekday: 'Thu', dateNum: '23' },
+    { weekday: 'Fri', dateNum: '24' },
+    { weekday: 'Sat', dateNum: '25' },
+    { weekday: 'Sun', dateNum: '26' },
+    { weekday: 'Mon', dateNum: '27' },
+    { weekday: 'Tue', dateNum: '28' },
+    { weekday: 'Wed', dateNum: '29' },
+    { weekday: 'Thu', dateNum: '30' },
+    { weekday: 'Fri', dateNum: '31' }
                 ]);
 
                 const itinerary = ref([
-                    { id: 1, dayIndex: 0, category: '航班', name: 'HKG-NRT', hours: '09:15', ticket: '14:45', notes: '國泰航空 CX504', transportMode: 'transit', duration: '5小時30分' },
-                    { id: 2, dayIndex: 0, category: '住宿', name: '東京由緣新宿溫泉飯店', hours: '15:30 辦理入住', ticket: '', notes: '第一天首個行程依規以前一日飯店做預估起算。', transportMode: 'walk', duration: '12分鐘' },
-                    { id: 3, dayIndex: 0, category: '景點', name: '新宿御苑', hours: '09:00 - 16:30', ticket: '¥500', notes: '春季櫻花與夏季綠意盎然的避暑日本庭園', transportMode: 'walk', duration: '15分鐘' },
-                    { id: 4, dayIndex: 1, category: '美食', name: '築地場外市場', hours: '08:00 - 13:00', ticket: '', notes: '品嚐新鮮海鮮丼與玉子燒', transportMode: 'transit', duration: '25分鐘' }
+                   // ⭕ 預設行程改為福岡
+const itinerary = ref([
+    { id: 1, dayIndex: 0, category: '航班', name: 'HKG-FUK', hours: '09:15', ticket: '13:45', notes: '國泰航空 CX510', transportMode: 'transit', duration: '3小時30分' },
+    { id: 2, dayIndex: 0, category: '住宿', name: '博多都飯店 (Miyako Hotel)', hours: '15:00 辦理入住', ticket: '', notes: '第一天抵達福岡機場後，直接搭乘地鐵至博多站，飯店就在車站筑紫口正對面。', transportMode: 'transit', duration: '5分鐘' },
+    { id: 3, dayIndex: 0, category: '景點', name: '櫛田神社', hours: '16:00 - 17:30', ticket: '免費', notes: '博多總鎮守，觀賞宏偉的博多祇園山笠。', transportMode: 'walk', duration: '15分鐘' }
+]);
                 ]);
 
                 const restaurants = ref([
@@ -595,12 +597,9 @@
                     return expenses.value.reduce((sum, item) => sum + Number(item.amount || 0), 0);
                 });
 
-                const totalExpensesHkd = computed(() => {
-                    return (totalExpensesJpy.value * 0.052).toFixed(1);
-                });
-
-                const convertToHkd = () => { exchangeHkd.value = (exchangeJpy.value * 0.052).toFixed(2); };
-                const convertToJpy = () => { exchangeJpy.value = (exchangeHkd.value / 0.052).toFixed(0); };
+               const totalExpensesHkd = computed(() => { return (totalExpensesJpy.value * 0.0488).toFixed(1); });
+const convertToHkd = () => { exchangeHkd.value = (exchangeJpy.value * 0.0488).toFixed(2); };
+const convertToJpy = () => { exchangeJpy.value = (exchangeHkd.value / 0.0488).toFixed(0); };
 
                 const navigateToMap = (query) => {
                     const baseUrl = 'https://www.google.com/maps/search/?api=1&query=';
